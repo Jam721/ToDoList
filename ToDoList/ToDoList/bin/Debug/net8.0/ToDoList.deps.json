@@ -39,6 +39,7 @@
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "8.0.8",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.4",
           "ToDoList.DAL": "1.0.0",
+          "ToDoList.Service": "1.0.0",
           "Microsoft.AspNetCore.Antiforgery": "8.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "8.0.0.0",
           "Microsoft.AspNetCore.Authentication.BearerToken": "8.0.0.0",
@@ -706,6 +707,18 @@
         },
         "compile": {
           "ToDoList.Domain.dll": {}
+        }
+      },
+      "ToDoList.Service/1.0.0": {
+        "dependencies": {
+          "ToDoList.DAL": "1.0.0",
+          "ToDoList.Domain": "1.0.0"
+        },
+        "runtime": {
+          "ToDoList.Service.dll": {}
+        },
+        "compile": {
+          "ToDoList.Service.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/8.0.0.0": {
@@ -2746,6 +2759,11 @@
       "sha512": ""
     },
     "ToDoList.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ToDoList.Service/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,4 +1,5 @@
 ﻿@using ToDoList.Domain.Enum
+@model IEnumerable<ToDoList.Domain.Entity.TaskEntity>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -18,16 +19,45 @@
     <button class="btn btn-primary" id="createTask">Создать</button>
 </form>
 
+<ul>
+    @foreach (var el in Model)
+    {
+        <li>@el.Name - @el.Description</li>
+    }
+</ul>
+
 @section Scripts
 {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $('#createTask').on('click', function (e){
             e.preventDefault();
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("Create", "Task")',
-                data: $('#createTaskForm').serialize()
+                data: $('#createTaskForm').serialize(),
+                success: function (response){
+                    Swal.fire({
+                        title: 'Информация',
+                        text: response.description,
+                        icon: 'success',
+                        confirmButtonText: 'Окей'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    });
+                },
+                error: function (response){
+                    Swal.fire({
+                        title: 'Информация',
+                        text: response.responseJSON.description,
+                        icon: 'error',
+                        confirmButtonText: 'Окей'
+                    })
+                }
             })    
+            
         });
     </script>
 }
