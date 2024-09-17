@@ -1,6 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using ToDoList.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+var connectionStrings = builder.Configuration.GetConnectionString("Database");
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseNpgsql(connectionStrings);
+});
 
 var app = builder.Build();
 
@@ -20,6 +29,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Task}/{action=Index}/{id?}");
 
 app.Run();

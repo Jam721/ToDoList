@@ -4,14 +4,91 @@
     "E:\\ToDoList\\ToDoList\\ToDoList\\ToDoList.csproj": {}
   },
   "projects": {
-    "E:\\ToDoList\\ToDoList\\ToDoList\\ToDoList.csproj": {
+    "E:\\ToDoList\\ToDoList\\ToDoList.DAL\\ToDoList.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\ToDoList\\ToDoList\\ToDoList\\ToDoList.csproj",
-        "projectName": "ToDoList",
-        "projectPath": "E:\\ToDoList\\ToDoList\\ToDoList\\ToDoList.csproj",
+        "projectUniqueName": "E:\\ToDoList\\ToDoList\\ToDoList.DAL\\ToDoList.DAL.csproj",
+        "projectName": "ToDoList.DAL",
+        "projectPath": "E:\\ToDoList\\ToDoList\\ToDoList.DAL\\ToDoList.DAL.csproj",
         "packagesPath": "C:\\Users\\artur\\.nuget\\packages\\",
-        "outputPath": "E:\\ToDoList\\ToDoList\\ToDoList\\obj\\",
+        "outputPath": "E:\\ToDoList\\ToDoList\\ToDoList.DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\artur\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "E:\\ToDoList\\ToDoList\\ToDoList.Domain\\ToDoList.Domain.csproj": {
+                "projectPath": "E:\\ToDoList\\ToDoList\\ToDoList.Domain\\ToDoList.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\ToDoList\\ToDoList\\ToDoList.Domain\\ToDoList.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\ToDoList\\ToDoList\\ToDoList.Domain\\ToDoList.Domain.csproj",
+        "projectName": "ToDoList.Domain",
+        "projectPath": "E:\\ToDoList\\ToDoList\\ToDoList.Domain\\ToDoList.Domain.csproj",
+        "packagesPath": "C:\\Users\\artur\\.nuget\\packages\\",
+        "outputPath": "E:\\ToDoList\\ToDoList\\ToDoList.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\artur\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -37,6 +114,79 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\ToDoList\\ToDoList\\ToDoList\\ToDoList.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\ToDoList\\ToDoList\\ToDoList\\ToDoList.csproj",
+        "projectName": "ToDoList",
+        "projectPath": "E:\\ToDoList\\ToDoList\\ToDoList\\ToDoList.csproj",
+        "packagesPath": "C:\\Users\\artur\\.nuget\\packages\\",
+        "outputPath": "E:\\ToDoList\\ToDoList\\ToDoList\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\artur\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "E:\\ToDoList\\ToDoList\\ToDoList.DAL\\ToDoList.DAL.csproj": {
+                "projectPath": "E:\\ToDoList\\ToDoList\\ToDoList.DAL\\ToDoList.DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
