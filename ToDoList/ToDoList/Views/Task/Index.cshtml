@@ -19,17 +19,141 @@
     <button class="btn btn-primary" id="createTask">Создать</button>
 </form>
 
-<ul>
-    @foreach (var el in Model)
-    {
-        <li>@el.Name - @el.Description</li>
-    }
-</ul>
+<br/>
+
+<h3>Фильтр</h3>
+
+<div class="row">
+    <div class="form-group col-md-6">
+        <label class="col-form-label">Название</label>
+        <input type="text" name="nameTask" class="form-control">
+    </div>
+    <div class="form-group col-md-6">
+        <label class="col-form-label">Приоритет</label>
+        <select id="prioritySearch" class="form-control mb-3" asp-items="Html.GetEnumSelectList<Priority>()"></select>
+    </div>
+</div>
+
+<br/>
+
+<h3>Таблица</h3>
+
+<table class="table table-dark table-hover" id="taskTableId">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Сложность</th>
+            <th>Готовность</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+
 
 @section Scripts
 {
+    <script type="text/javascript" src="https://cdn.datatables.net/2.1.7/js/dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+    
+    
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: "btn btn-success",
+          },
+          buttonsStyling: false
+        });
+    
+        let dataTable = $('#taskTableId').DataTable({
+            info: false,
+            serverSide: true,
+            searching: false,
+            paging: false,
+            sorting: false,
+            ajax: {
+                url: "@Url.Action("TaskHandler")",
+                method: 'POST',
+                data: model
+            },
+            columns:[
+                {data: 'name'},
+                {data: 'priority'},
+                {data: 'description'},
+                {data: 'isDone'},
+                {
+                    data: null,
+                    sortable: false,
+                    render: function (data, type){
+                        return '<button class="btn btn-success btn-sm center-block">Выполнить</button>'    
+                    }
+                }
+            ],
+            createdRow: function (nRow, data){
+                
+                var handlerComplete = function (){
+                    swalWithBootstrapButtons.fire({
+                      title: "Вы уверены?",
+                      icon: "warning",
+                      confirmButtonText: "Да!",
+                      reverseButtons: true
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Action("EndTask")',
+                            data: {id: data.id},
+                            success: function (response){
+                                Swal.fire({
+                                    title: 'Информация',
+                                    text: response.description,
+                                    icon: 'success',
+                                    confirmButtonText: 'Окей'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
+                                });
+                            },
+                            error: function (response){
+                                Swal.fire({
+                                    title: 'Информация',
+                                    text: response.responseJSON.description,
+                                    icon: 'error',
+                                    confirmButtonText: 'Окей'
+                                })
+                            }
+                        })
+                      } 
+                    });
+                }
+                
+                for (var i = 0; i<dataTable.columns().header().length-1; i++){
+                    $('td', nRow).eq(i).css('cursor', 'pointer');
+                    
+                    $('td', nRow).eq(i).on('click', null);
+                }
+                $('td button', nRow).on('click', handlerComplete);
+            }
+        });
+        
+        function model(){
+            return{
+                name: $('input[name="nameTask"]').val(),
+                priority: $('#prioritySearch option:selected').val(),
+            }
+        }
+        
+        $('input[name="nameTask"]').on('change', function (){
+            dataTable.draw();
+        })
+    
+         $('#prioritySearch').on('change', function (){
+             dataTable.draw();
+         })
+        
         $('#createTask').on('click', function (e){
             e.preventDefault();
             $.ajax({

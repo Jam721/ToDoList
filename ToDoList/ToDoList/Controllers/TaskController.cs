@@ -1,8 +1,7 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ToDoList.DAL;
 using ToDoList.Domain.Entity;
+using ToDoList.Domain.Filters.Task;
 using ToDoList.Domain.ViewModels.Task;
 using ToDoList.Service.Interfaces;
 
@@ -40,4 +39,45 @@ public class TaskController : Controller
 
         return BadRequest(new { description = response.Description });
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> TaskHandler(TaskFilter filter)
+    {
+        var response = await _taskService.GetTasks(filter);
+        
+        return Json(new {data = response.Data});
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> EndTask(long id)
+    {
+        var response = await _taskService.EndTask(id);
+        if (response.StatusCode == Domain.Enum.StatusCode.OK)
+        {
+            return Ok(new { description = response.Description });
+        }
+
+        return BadRequest(new { description = response.Description });
+    }
+    
+    public async Task<IActionResult> GetCompletedTasks()
+    {
+        var result = await _taskService.GetCompletedTask();
+        return Json(new { data = result.Data });
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
